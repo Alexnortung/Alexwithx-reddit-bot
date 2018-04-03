@@ -1,0 +1,27 @@
+{
+  "name": "alex-reddit-bot",
+  "version": "1.0.0",
+  "description": "a bot for reddit",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alexnortung/Alexwithx-reddit-bot.git"
+  },
+  "keywords": [
+    "reddit"
+  ],
+  "author": "Alexander Nortung",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Alexnortung/Alexwithx-reddit-bot/issues"
+  },
+  "homepage": "https://github.com/Alexnortung/Alexwithx-reddit-bot#readme",
+  "dependencies": {
+    "dotenv": "^5.0.1",
+    "snoostorm": "0.0.5",
+    "snoowrap": "^1.15.2"
+  }
+}

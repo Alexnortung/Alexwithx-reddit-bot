@@ -2,6 +2,9 @@ require('dotenv').config();
 
 const Snoowrap = require('snoowrap');
 const Snoostorm = require('snoostorm');
+const schedule = require('node-schedule');
+ 
+
 
 
 
@@ -14,17 +17,36 @@ const r = new Snoowrap({
 });
 
 var mySubmissions = [];
+updateMyPosts();
 
-r.getUser(process.env.REDDIT_USER).getSubmissions().then((submissions) => {
-	//console.log(submissions);
-	for (var i = submissions.length - 1; i >= 0; i--) {
-		mySubmissions.push(submissions[i].name)
-	}
-	console.log(mySubmissions);
+
+function updateMyPosts() {
+	r.getUser(process.env.REDDIT_USER).getSubmissions().then((submissions) => {
+		//console.log(submissions);
+		mySubmissions = [];
+		for (var i = submissions.length - 1; i >= 0; i--) {
+			mySubmissions.push(submissions[i].name)
+		}
+		console.log(mySubmissions);
+	});
+}
+
+function submitPost() {
+	r.getSubreddit('FreeKarma4U')
+		.submitSelfpost({
+			title: "karma giving bot",
+			text: "just comment on this thread and I will upvote your comment and some of your posts"
+		}).then(()=>{
+			updateMyPosts();
+		}).catch(()=>{});
+}
+
+
+
+
+var j = schedule.scheduleJob('0 0 13 * * *', () => {
+	submitPost();
 });
-
-
-r.getSubreddit('FreeKarma4U')
 
 
 
@@ -82,6 +104,7 @@ comments.on("comment", (comment) => {
 });
 
 
+if (process.env.DEV == "TRUE") {
+	//submitPost();
+}
 
-
-	
